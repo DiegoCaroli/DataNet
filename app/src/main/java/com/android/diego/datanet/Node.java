@@ -12,4 +12,12 @@ public class Node {
 
     public Node() {
     }
+
+    public String getName() {
+        return mName;
+    }
+
+    public void setName(String name) {
+        mName = name;
+    }
 }

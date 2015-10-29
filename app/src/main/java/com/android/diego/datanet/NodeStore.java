@@ -14,13 +14,31 @@ public class NodeStore {
     private List<Node> mNodes;
 
     public static NodeStore get(Context context) {
-        if (sNodeStore == null) {
-            sNodeStore = new Node(context);
+        if (NodeStore == null) {
+            sNodeStore = new NodeStore(context);
         }
         return sNodeStore;
     }
 
-    private NodeStore(Context context) {
+    private CrimeLab(Context context) {
         mNodes = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            Node node = new Node();
+            node.setName("Node: " + i);
+            mNodes.add(node);
+        }
+    }
+
+    public List<Node> getCrimes() {
+        return mNodes;
+    }
+
+    public Node getCrime(String name) {
+        for (Node node : mNodes) {
+            if (node.getName().equals(name)) {
+                return node;
+            }
+        }
+        return null;
     }
 }
