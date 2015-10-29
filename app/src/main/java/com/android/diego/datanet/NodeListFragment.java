@@ -34,7 +34,7 @@ public class NodeListFragment extends Fragment {
 
     private void updateUI() {
         NodeStore nodeStore = NodeStore.get(getActivity());
-        List<Node> nodes = nodeStore.get;
+        List<Node> nodes = nodeStore.getNodes();
 
         mAdapter = new NodeAdapter(nodes);
         mNodeRecyclerView.setAdapter(mAdapter);
@@ -54,21 +54,19 @@ public class NodeListFragment extends Fragment {
             itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_node_title_text_view);
-            mDateTextView = (TextView) itemView.findViewById(R.id.list_item_node_date_text_view);
-            mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_node_solved_check_box);
+            //mDateTextView = (TextView) itemView.findViewById(R.id.list_item_node_date_text_view);
         }
 
         public void bindNode(Node node) {
             mNode = node;
-            mTitleTextView.setText(mNode.getTitle());
-            mDateTextView.setText(mNode.getDate().toString());
-            mSolvedCheckBox.setChecked(mNode.isSolved());
+            mTitleTextView.setText(mNode.getName());
+            //mDateTextView.setText(mNode.getDate().toString());
         }
 
         @Override
         public void onClick(View v) {
             Toast.makeText(getActivity(),
-                    mNode.getTitle() + " clicked!", Toast.LENGTH_SHORT)
+                    mNode.getName() + " clicked!", Toast.LENGTH_SHORT)
                     .show();
         }
     }

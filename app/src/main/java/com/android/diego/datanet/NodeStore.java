@@ -14,7 +14,7 @@ public class NodeStore {
     private List<Node> mNodes;
 
     public static NodeStore get(Context context) {
-        if (NodeStore == null) {
+        if (sNodeStore == null) {
             sNodeStore = new NodeStore(context);
         }
         return sNodeStore;

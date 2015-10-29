@@ -1,5 +1,6 @@
 package com.android.diego.datanet;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -52,6 +53,9 @@ public class NetActivity extends AppCompatActivity {
     private void checkNameNet() {
         if (mNet.getName() == "") {
             Toast.makeText(this, R.string.empty_name_net, Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(NetActivity.this, NodeListActivity.class);
+            startActivity(intent);
         }
     }
 }
