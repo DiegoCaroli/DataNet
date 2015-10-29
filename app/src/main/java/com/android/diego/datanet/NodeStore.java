@@ -22,7 +22,7 @@ public class NodeStore {
 
     private CrimeLab(Context context) {
         mNodes = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i <= 100; i++) {
             Node node = new Node();
             node.setName("Node: " + i);
             mNodes.add(node);
