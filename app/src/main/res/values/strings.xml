@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">DataNet</string>
+
+    <string name="insert_net">Insert the name of the net:</string>
+    <string name="hint_insert_net">Name of the net</string>
+    <string name="empty_name_net">You can\'t continue, you must insert the name of the net.</string>
+
+    <string name="next_button">Next</string>
 </resources>
