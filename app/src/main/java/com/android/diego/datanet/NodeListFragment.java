@@ -30,4 +30,29 @@ public class NodeListFragment extends Fragment {
 
         return view;
     }
+
+    private class NodeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private TextView mTitleTextView;
+
+        public NodeHolder(View itemView) {
+            super(itemView);
+            itemView.setOnClickListener(this);
+
+            mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_node_title_text_view);
+        }
+
+    }
+
+    private class NodeAdapter extends RecyclerView.Adapter<NodeHolder> {
+
+        private List<Node> mNodes;
+
+        public CrimeAdapter(List<Node> nodes) {
+            mNodes = nodes;
+        }
+
+
+    }
+
 }
