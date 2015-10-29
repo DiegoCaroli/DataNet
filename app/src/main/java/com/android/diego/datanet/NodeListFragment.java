@@ -16,6 +16,7 @@ import java.util.List;
 public class NodeListFragment extends Fragment {
 
     private RecyclerView mNodeRecyclerView;
+    private NodeAdapter mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,28 +32,71 @@ public class NodeListFragment extends Fragment {
         return view;
     }
 
-    private class NodeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private void updateUI() {
+        NodeStore nodeStore = NodeStore.get(getActivity());
+        List<Node> nodes = nodeStore.get;
+
+        mAdapter = new NodeAdapter(nodes);
+        mNodeRecyclerView.setAdapter(mAdapter);
+    }
+
+    private class NodeHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener {
 
         private TextView mTitleTextView;
+        private TextView mDateTextView;
+        private CheckBox mSolvedCheckBox;
+
+        private Node mNode;
 
         public NodeHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_node_title_text_view);
+            mDateTextView = (TextView) itemView.findViewById(R.id.list_item_node_date_text_view);
+            mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_node_solved_check_box);
         }
 
+        public void bindNode(Node node) {
+            mNode = node;
+            mTitleTextView.setText(mNode.getTitle());
+            mDateTextView.setText(mNode.getDate().toString());
+            mSolvedCheckBox.setChecked(mNode.isSolved());
+        }
+
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(getActivity(),
+                    mNode.getTitle() + " clicked!", Toast.LENGTH_SHORT)
+                    .show();
+        }
     }
 
     private class NodeAdapter extends RecyclerView.Adapter<NodeHolder> {
 
         private List<Node> mNodes;
 
-        public CrimeAdapter(List<Node> nodes) {
+        public NodeAdapter(List<Node> nodes) {
             mNodes = nodes;
         }
 
+        @Override
+        public NodeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+            View view = layoutInflater.inflate(R.layout.list_item_node, parent, false);
+            return new NodeHolder(view);
+        }
 
+        @Override
+        public void onBindViewHolder(NodeHolder holder, int position) {
+            Node node = mNodes.get(position);
+            holder.bindNode(node);
+        }
+
+        @Override
+        public int getItemCount() {
+            return mNodes.size();
+        }
     }
-
 }

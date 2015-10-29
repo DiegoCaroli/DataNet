@@ -29,11 +29,11 @@ public class NodeStore {
         }
     }
 
-    public List<Node> getCrimes() {
+    public List<Node> getNodes() {
         return mNodes;
     }
 
-    public Node getCrime(String name) {
+    public Node getNode(String name) {
         for (Node node : mNodes) {
             if (node.getName().equals(name)) {
                 return node;
