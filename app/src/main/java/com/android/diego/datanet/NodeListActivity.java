@@ -1,7 +1,11 @@
 package com.android.diego.datanet;
 
-/**
- * Created by Diego on 29/10/2015.
- */
-public class NodeListActivity {
+import android.support.v4.app.Fragment;
+
+public class NodeListActivity extends SingleFragmentActivity {
+
+    @Override
+    protected Fragment createFragment() {
+        return new NodeListFragment();
+    }
 }

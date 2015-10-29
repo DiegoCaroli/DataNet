@@ -20,7 +20,7 @@ public class NodeStore {
         return sNodeStore;
     }
 
-    private CrimeLab(Context context) {
+    private NodeStore(Context context) {
         mNodes = new ArrayList<>();
         for (int i = 0; i <= 100; i++) {
             Node node = new Node();
