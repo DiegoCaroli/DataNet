@@ -6,4 +6,13 @@
     <string name="empty_name_net">You can\'t continue, you must insert the name of the net.</string>
 
     <string name="next_button">Next</string>
+
+    <string name="insert_node">Insert Node</string>
+    <string name="insert_node_with_parents">Insert Node with Parents</string>
+    <string name="done">Done</string>
+    <string name="title_activity_node">NodeActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_node_list">NodeListActivity</string>
+
+
 </resources>

@@ -1,5 +1,6 @@
 package com.android.diego.datanet;
 
+
 import android.content.Context;
 
 import java.util.ArrayList;
@@ -22,9 +23,10 @@ public class NodeStore {
 
     private NodeStore(Context context) {
         mNodes = new ArrayList<>();
-        for (int i = 0; i <= 100; i++) {
+        for (int i = 0; i < 100; i++) {
             Node node = new Node();
-            node.setName("Node: " + i);
+            node.setName("Node #" + i);
+
             mNodes.add(node);
         }
     }
