@@ -54,7 +54,7 @@ public class NetActivity extends AppCompatActivity {
         if (mNet.getName() == "") {
             Toast.makeText(this, R.string.empty_name_net, Toast.LENGTH_SHORT).show();
         } else {
-            Intent intent = new Intent(this, NodeListActivity.class);
+            Intent intent = new Intent(NetActivity.this, NodeListActivity.class);
             startActivity(intent);
         }
     }
