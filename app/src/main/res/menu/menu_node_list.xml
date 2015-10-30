@@ -2,8 +2,16 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="com.android.diego.datanet.NodeListActivity">
-    <item android:id="@+id/action_settings"
-          android:title="@string/action_settings"
+    <item android:id="@+id/action_insert_node"
+          android:title="@string/insert_node"
           android:orderInCategory="100"
           app:showAsAction="never"/>
+      <item android:id="@+id/action_insert_node_with_parents"
+            android:title="@string/insert_node_with_parents"
+            android:orderInCategory="200"
+            app:showAsAction="never"/>
+      <item android:id="@+id/action_done"
+            android:title="@string/done"
+            android:orderInCategory="300"
+            app:showAsAction="never"/>
 </menu>
