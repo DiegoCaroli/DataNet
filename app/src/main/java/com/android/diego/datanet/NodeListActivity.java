@@ -1,5 +1,6 @@
 package com.android.diego.datanet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -41,8 +42,8 @@ public class NodeListActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_insert_node) {
-            Toast.makeText(getApplicationContext(), "Insert Node Pressed",
-                    Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(NodeListActivity.this, InsertNodeActivity.class);
+            startActivity(intent);
         } else if (id == R.id.action_insert_node_with_parents) {
             Toast.makeText(getApplicationContext(), "Insert Node Parents Pressed",
                     Toast.LENGTH_LONG).show();

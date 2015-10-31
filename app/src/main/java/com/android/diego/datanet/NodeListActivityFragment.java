@@ -49,7 +49,7 @@ public class NodeListActivityFragment extends Fragment {
             implements View.OnClickListener {
 
         private TextView mTitleTextView;
-        private TextView mDateTextView;
+        private TextView mSubtitleTextView;
 
         private Node mNode;
 
@@ -58,13 +58,13 @@ public class NodeListActivityFragment extends Fragment {
             itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_node_title_text_view);
-            //mDateTextView = (TextView) itemView.findViewById(R.id.list_item_node_date_text_view);
+            mSubtitleTextView = (TextView) itemView.findViewById(R.id.list_item_node_parents_text_view);
         }
 
         public void bindNode(Node node) {
             mNode = node;
             mTitleTextView.setText(mNode.getName());
-            //mDateTextView.setText(mNode.getDate().toString());
+            mSubtitleTextView.setText(mNode.getParents().toString());
         }
 
         @Override
