@@ -41,12 +41,9 @@ public class NodeListActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_insert_node) {
+        if (id == R.id.action_new_node) {
             Intent intent = new Intent(NodeListActivity.this, InsertNodeActivity.class);
             startActivity(intent);
-        } else if (id == R.id.action_insert_node_with_parents) {
-            Toast.makeText(getApplicationContext(), "Insert Node Parents Pressed",
-                    Toast.LENGTH_LONG).show();
         } else if (id == R.id.action_done) {
             Toast.makeText(getApplicationContext(), "Done Pressed",
                     Toast.LENGTH_LONG).show();

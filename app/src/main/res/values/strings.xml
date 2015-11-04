@@ -9,9 +9,8 @@
 
     <string name="title_activity_node_list">NodeListActivity</string>
 
-    <string name="insert_node_menu">Insert Node</string>
-    <string name="insert_node_with_parents_menu">Insert Node with Parents</string>
-    <string name="done_menu">Done</string>
+    <string name="menu_new_node">New Node</string>
+    <string name="menu_done">Done</string>
 
     <string name="title_activity_insert_node">Insert New Node</string>
 
