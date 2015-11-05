@@ -11,6 +11,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.app.PendingIntent.getActivity;
+
 public class NewNodeActivity extends AppCompatActivity {
 
     private Spinner spinner;
@@ -29,9 +31,12 @@ public class NewNodeActivity extends AppCompatActivity {
 
         spinner = (Spinner) findViewById(R.id.spinner_parent);
         List<String> list = new ArrayList<String>();
-        list.add("list 1");
-        list.add("list 2");
-        list.add("list 3");
+        list.add("None");
+
+        NodeStore nodeStore = NodeStore.get(this).getNode();
+
+
+
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

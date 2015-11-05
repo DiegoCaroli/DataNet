@@ -43,12 +43,22 @@ public class NodeListActivityFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
     private void updateUI() {
         NodeStore nodeStore = NodeStore.get(getActivity());
         List<Node> nodes = nodeStore.getNodes();
 
-        mAdapter = new NodeAdapter(nodes);
-        mNodeRecyclerView.setAdapter(mAdapter);
+        if (mAdapter == null) {
+            mAdapter = new NodeAdapter(nodes);
+            mNodeRecyclerView.setAdapter(mAdapter);
+        }
+
+
     }
 
     private class NodeHolder extends RecyclerView.ViewHolder

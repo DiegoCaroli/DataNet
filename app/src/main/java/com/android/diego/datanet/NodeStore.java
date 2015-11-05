@@ -21,8 +21,13 @@ public class NodeStore {
         return sNodeStore;
     }
 
+    public void addNode(Node node) {
+        mNodes.add(node);
+    }
+
     private NodeStore(Context context) {
         mNodes = new ArrayList<>();
+        /*
         for (int i = 0; i < 100; i++) {
             Node node = new Node();
             node.setName("Node #" + i);
@@ -30,6 +35,7 @@ public class NodeStore {
             //node.addParent("Parent: " + ++i);
             mNodes.add(node);
         }
+        */
     }
 
     public List<Node> getNodes() {
