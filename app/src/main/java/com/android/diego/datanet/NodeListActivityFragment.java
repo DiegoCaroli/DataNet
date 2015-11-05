@@ -2,6 +2,7 @@ package com.android.diego.datanet;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,15 +23,20 @@ public class NodeListActivityFragment extends Fragment {
 
     public NodeListActivityFragment() {
     }
-
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_node_list, container, false);
 
-        mNodeRecyclerView = (RecyclerView) view
-                .findViewById(R.id.node_recycler_view);
+        mNodeRecyclerView = (RecyclerView) view.findViewById(R.id.node_recycler_view);
+        mNodeRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+
+        mNodeRecyclerView.setHasFixedSize(true);
         mNodeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mNodeRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
 
         updateUI();
 
@@ -49,6 +55,7 @@ public class NodeListActivityFragment extends Fragment {
             implements View.OnClickListener {
 
         private TextView mTitleTextView;
+        private TextView mTypeTextView;
         private TextView mSubtitleTextView;
 
         private Node mNode;
@@ -58,13 +65,15 @@ public class NodeListActivityFragment extends Fragment {
             itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_node_title_text_view);
-            mSubtitleTextView = (TextView) itemView.findViewById(R.id.list_item_node_parents_text_view);
+            mTypeTextView = (TextView) itemView.findViewById(R.id.list_item_type_node_title_text_view);
+            //mSubtitleTextView = (TextView) itemView.findViewById(R.id.list_item_node_parents_text_view);
         }
 
         public void bindNode(Node node) {
             mNode = node;
             mTitleTextView.setText(mNode.getName());
-            mSubtitleTextView.setText(mNode.getParents().toString());
+            mTypeTextView.setText(mNode.getType());
+            //mSubtitleTextView.setText(mNode.getParents().toString());
         }
 
         @Override

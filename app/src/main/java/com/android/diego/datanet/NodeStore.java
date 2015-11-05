@@ -26,8 +26,8 @@ public class NodeStore {
         for (int i = 0; i < 100; i++) {
             Node node = new Node();
             node.setName("Node #" + i);
-            node.addParent("Parent: " + i);
-            node.addParent("Parent: " + ++i);
+            //node.addParent("Parent: " + i);
+            //node.addParent("Parent: " + ++i);
             mNodes.add(node);
         }
     }

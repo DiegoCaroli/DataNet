@@ -10,12 +10,14 @@ import java.util.List;
 public class Node {
 
     private String mName;
+    private String mType;
     private List<String> mValues;
     private List<String> mParents;
     private List<Double> mProbabilities;
 
     public Node() {
         mName = "";
+        mType = "evidence";
         mValues = new ArrayList<>();
         mParents = new ArrayList<>();
         mProbabilities = new ArrayList<>();
@@ -29,19 +31,11 @@ public class Node {
         mName = name;
     }
 
-    public List<String> getValues() {
-        return mValues;
+    public String getType() {
+        return mType;
     }
 
-    public List<String> getParents() {
-        return mParents;
-    }
-
-    public void addParent(String parent) {
-        mParents.add(parent);
-    }
-
-    public List<Double> getProbabilities() {
-        return mProbabilities;
+    public void setType(String type) {
+        mType = type;
     }
 }

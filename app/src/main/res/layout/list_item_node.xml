@@ -13,10 +13,18 @@
         tools:text="Node Title"/>
 
     <TextView
-        android:id="@+id/list_item_node_parents_text_view"
+        android:id="@+id/list_item_type_node_title_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/list_item_node_title_text_view"
+        android:padding="4dp"
+        tools:text="Node Type"/>
+
+    <TextView
+        android:id="@+id/list_item_node_parents_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/list_item_type_node_title_text_view"
         android:padding="4dp"
         tools:text="Node Parents"/>
 
