@@ -20,10 +20,7 @@
             android:label="@string/title_activity_node_list"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity
-            android:name=".InsertNodeActivity"
-            android:label="@string/title_activity_insert_node"
-            android:theme="@style/AppTheme.NoActionBar" >
+        <activity android:name=".NewNodeActivity" >
         </activity>
     </application>
 
