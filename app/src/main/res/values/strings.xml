@@ -6,6 +6,7 @@
     <string name="empty_name_net">You can\'t continue, you must insert the name of the net.</string>
 
     <string name="next_button">Next</string>
+    <string name="done_button">Done</string>
 
     <string name="title_activity_node_list">NodeListActivity</string>
 
