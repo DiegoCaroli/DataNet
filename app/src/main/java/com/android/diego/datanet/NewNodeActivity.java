@@ -35,8 +35,7 @@ public class NewNodeActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Done Pressed",
                     Toast.LENGTH_LONG).show();
         } else if (id == R.id.action_cancel_new_node) {
-            Toast.makeText(getApplicationContext(), "Cancel Pressed",
-                    Toast.LENGTH_LONG).show();
+            this.onBackPressed();
         }
 
         return super.onOptionsItemSelected(item);
