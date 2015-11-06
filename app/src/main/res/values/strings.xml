@@ -12,6 +12,8 @@
 
     <string name="menu_new_node">New Node</string>
     <string name="menu_done">Done</string>
+    <string name="menu_done_new_node">Done</string>
+    <string name="menu_cancel_new_node">Cancel</string>
 
     <string name="title_activity_insert_node">Insert New Node</string>
 
@@ -20,6 +22,7 @@
 
     <string name="parent_name_label">Parent</string>
     <string name="parent_name_hint">Select a parent for the node.</string>
+    <string name="title_activity_new_node">NewNodeActivity</string>
 
 
 
