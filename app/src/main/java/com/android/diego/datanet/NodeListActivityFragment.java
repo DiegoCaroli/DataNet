@@ -36,8 +36,6 @@ public class NodeListActivityFragment extends Fragment {
         mNodeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mNodeRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
-
         updateUI();
 
         return view;
@@ -57,8 +55,6 @@ public class NodeListActivityFragment extends Fragment {
             mAdapter = new NodeAdapter(nodes);
             mNodeRecyclerView.setAdapter(mAdapter);
         }
-
-
     }
 
     private class NodeHolder extends RecyclerView.ViewHolder
@@ -82,7 +78,7 @@ public class NodeListActivityFragment extends Fragment {
         public void bindNode(Node node) {
             mNode = node;
             mTitleTextView.setText(mNode.getName());
-            mTypeTextView.setText(mNode.getType());
+            //mTypeTextView.setText(mNode.isEvidence());
             //mSubtitleTextView.setText(mNode.getParents().toString());
         }
 
