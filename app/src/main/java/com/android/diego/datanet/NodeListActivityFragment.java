@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.diego.datanet.Libraries.DividerItemDecoration;
+
 import java.util.List;
 
 /**

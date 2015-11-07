@@ -41,6 +41,5 @@
         android:text="@string/node_name_label"
         style="?android:listSeparatorTextViewStyle"/>
 
-    <Multiple
 
 </LinearLayout>

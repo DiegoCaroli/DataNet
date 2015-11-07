@@ -1,4 +1,4 @@
-package com.android.diego.datanet;
+package com.android.diego.datanet.Libraries;
 
 import android.content.Context;
 import android.content.res.TypedArray;
