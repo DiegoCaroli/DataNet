@@ -1,12 +1,14 @@
 package com.android.diego.datanet;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import java.util.List;
+
+import com.android.diego.datanet.Libraries.MultiSelectionSpinner;
 
 public class NewNodeActivity extends AppCompatActivity {
 
@@ -14,6 +16,15 @@ public class NewNodeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_node);
+
+        String[] strings = { "Red", "Blue", "Green" };
+
+        MultiSelectionSpinner mySpin = (MultiSelectionSpinner)findViewById(R.id.spinner);
+        mySpin.setItems(strings);
+
+// ...
+
+        List<String> selected = mySpin.getSelectedStrings();
     }
 
     @Override

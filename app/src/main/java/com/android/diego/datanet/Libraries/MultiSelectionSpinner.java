@@ -85,7 +85,7 @@ public class MultiSelectionSpinner extends Spinner implements
         simple_adapter.clear();
         simple_adapter.add(_items[0]);
         Arrays.fill(mSelection, false);
-        mSelection[0] = true;
+        //mSelection[0] = true;
         mSelectionAtStart[0] = true;
     }
 
