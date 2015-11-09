@@ -17,12 +17,10 @@ public class NewNodeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_node);
 
-        String[] strings = { "Red", "Blue", "Green" };
+        String[] strings = { "Node1", "Node2", "Node3" };
 
         MultiSelectionSpinner mySpin = (MultiSelectionSpinner)findViewById(R.id.spinner);
         mySpin.setItems(strings);
-
-// ...
 
         List<String> selected = mySpin.getSelectedStrings();
     }

@@ -22,8 +22,8 @@
     <string name="node_evidence_title">Evidence</string>
     <string name="node_evidence_label">Evidence?</string>
 
-    <string name="parent_name_label">Parent</string>
-    <string name="parent_name_hint">Select a parent for the node.</string>
+    <string name="parents_name_label">Parents</string>
+    <string name="parents_name_hint">Select a parent for the node.</string>
 
     <string name="spinner_title">title</string>
 

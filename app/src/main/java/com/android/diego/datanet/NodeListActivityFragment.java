@@ -59,8 +59,8 @@ public class NodeListActivityFragment extends Fragment {
         }
     }
 
-    private class NodeHolder extends RecyclerView.ViewHolder
-            implements View.OnClickListener {
+    private class NodeHolder extends RecyclerView.ViewHolder {
+           // implements View.OnClickListener {
 
         private TextView mTitleTextView;
         private TextView mTypeTextView;
@@ -70,7 +70,7 @@ public class NodeListActivityFragment extends Fragment {
 
         public NodeHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
+            //itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_node_title_text_view);
             mTypeTextView = (TextView) itemView.findViewById(R.id.list_item_type_node_title_text_view);
@@ -84,12 +84,14 @@ public class NodeListActivityFragment extends Fragment {
             //mSubtitleTextView.setText(mNode.getParents().toString());
         }
 
+        /*
         @Override
         public void onClick(View v) {
             Toast.makeText(getActivity(),
                     mNode.getName() + " clicked!", Toast.LENGTH_SHORT)
                     .show();
         }
+        */
     }
 
     private class NodeAdapter extends RecyclerView.Adapter<NodeHolder> {
