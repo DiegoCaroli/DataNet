@@ -27,4 +27,7 @@
 
     <string name="spinner_title">title</string>
 
+    <string name="values_title">Values</string>
+    <string name="values_hint">Enter a name for the value..</string>
+
 </resources>

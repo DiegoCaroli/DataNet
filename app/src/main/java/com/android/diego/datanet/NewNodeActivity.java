@@ -1,9 +1,16 @@
 package com.android.diego.datanet;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -11,6 +18,10 @@ import java.util.List;
 import com.android.diego.datanet.Libraries.MultiSelectionSpinner;
 
 public class NewNodeActivity extends AppCompatActivity {
+
+    private EditText mEditTextInField;
+    private Button mButtonAdd;
+    private LinearLayout mContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +33,9 @@ public class NewNodeActivity extends AppCompatActivity {
         MultiSelectionSpinner mySpin = (MultiSelectionSpinner)findViewById(R.id.spinner);
         mySpin.setItems(strings);
 
-        List<String> selected = mySpin.getSelectedStrings();
+        //List<String> selected = mySpin.getSelectedStrings();
+
+        addValues();
     }
 
     @Override
@@ -48,6 +61,29 @@ public class NewNodeActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void addValues() {
+        mEditTextInField = (EditText)findViewById(R.id.textin);
+        mButtonAdd = (Button)findViewById(R.id.add);
+        mContainer = (LinearLayout)findViewById(R.id.container);
+
+        mButtonAdd.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                LayoutInflater layoutInflater =
+                        (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final View addView = layoutInflater.inflate(R.layout.row_values, null);
+                TextView textOut = (TextView) addView.findViewById(R.id.textout);
+                textOut.setTextSize(18);
+                textOut.setText("Value: " + mEditTextInField.getText().toString());
+                mEditTextInField.setText("");
+
+                mContainer.addView(addView);
+            }
+        });
+
     }
 }
 
