@@ -36,4 +36,27 @@ public class Node {
         mName = name;
     }
 
+    public List<String> getValues() {
+        return mValues;
+    }
+
+    public void setValues(List<String> values) {
+        mValues = values;
+    }
+
+    public List<Node> getParents() {
+        return mParents;
+    }
+
+    public void setParents(List<Node> parents) {
+        mParents = parents;
+    }
+
+    public List<Double> getProbabilities() {
+        return mProbabilities;
+    }
+
+    public void setProbabilities(List<Double> probabilities) {
+        mProbabilities = probabilities;
+    }
 }

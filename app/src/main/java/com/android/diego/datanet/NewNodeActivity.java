@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.android.diego.datanet.Libraries.MultiSelectionSpinner;
@@ -27,6 +28,7 @@ public class NewNodeActivity extends AppCompatActivity {
     private EditText mEditTextInField;
     private Button mButtonAdd;
     private LinearLayout mContainer;
+    private MultiSelectionSpinner mySpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +38,7 @@ public class NewNodeActivity extends AppCompatActivity {
         mNode = new Node();
 
         setNameNode();
-
-        /*
-        String[] strings = { "Node1", "Node2", "Node3" };
-
-        MultiSelectionSpinner mySpin = (MultiSelectionSpinner)findViewById(R.id.spinner);
-        mySpin.setItems(strings);
-
-        //List<String> selected = mySpin.getSelectedStrings();
-
-        */
-
+        addParentsOnSpinner();
         //addValues();
     }
 
@@ -96,7 +88,29 @@ public class NewNodeActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    private void addParentsOnSpinner() {
+        NodeStore nodeStore = NodeStore.get(getBaseContext());
+        List<Node> nodes = nodeStore.getNodes();
+
+        List<String> parentsNode = new ArrayList<String>();
+
+        for (Node node : nodes) {
+            parentsNode.add(node.getName());
+        }
+
+        mySpinner = (MultiSelectionSpinner)findViewById(R.id.spinner);
+
+        if (parentsNode.isEmpty()) {
+            mySpinner.setEnabled(false);
+            mySpinner.setClickable(false);
+        } else {
+            mySpinner.setItems(parentsNode);
+        }
+
+
+        //List<String> selected = mySpin.getSelectedStrings();
     }
 
     private void addValues() {
