@@ -12,7 +12,6 @@ public class Node {
 
     private UUID mId;
     private String mName;
-    private boolean mEvidence;
     private List<String> mValues;
     private List<String> mParents;
     private List<Double> mProbabilities;
@@ -20,7 +19,6 @@ public class Node {
     public Node() {
         mId = UUID.randomUUID();
         mName = "";
-        mEvidence = true;
         mValues = new ArrayList<>();
         mParents = new ArrayList<>();
         mProbabilities = new ArrayList<>();
@@ -38,11 +36,4 @@ public class Node {
         mName = name;
     }
 
-    public boolean isEvidence() {
-        return mEvidence;
-    }
-
-    public void setEvidence(boolean evidence) {
-        mEvidence = evidence;
-    }
 }

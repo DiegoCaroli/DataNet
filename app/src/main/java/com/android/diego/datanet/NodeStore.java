@@ -32,7 +32,6 @@ public class NodeStore {
         for (int i = 0; i < 100; i++) {
             Node node = new Node();
             node.setName("Node #" + i);
-            node.setEvidence(i % 2 == 0);
             //node.addParent("Parent: " + ++i);
             mNodes.add(node);
         }

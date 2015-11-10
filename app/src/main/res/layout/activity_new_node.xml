@@ -22,22 +22,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/node_evidence_title"
-        style="?android:listSeparatorTextViewStyle"/>
-
-    <CheckBox
-        android:id="@+id/node_evidence"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:checked="true"
-        android:text="@string/node_evidence_label"/>
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="@string/parents_name_label"
         style="?android:listSeparatorTextViewStyle"/>
 
@@ -53,7 +37,6 @@
         android:layout_height="wrap_content"
         android:text="@string/values_title"
         style="?android:listSeparatorTextViewStyle"/>
-
 
     <RelativeLayout
         android:layout_width="match_parent"
