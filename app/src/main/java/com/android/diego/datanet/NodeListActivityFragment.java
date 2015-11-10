@@ -63,8 +63,9 @@ public class NodeListActivityFragment extends Fragment {
            // implements View.OnClickListener {
 
         private TextView mTitleTextView;
-        private TextView mTypeTextView;
-        private TextView mSubtitleTextView;
+        private TextView mValuesTextView;
+        private TextView mParentsTextView;
+        private TextView mProbabilitiesTextView;
 
         private Node mNode;
 
@@ -73,13 +74,14 @@ public class NodeListActivityFragment extends Fragment {
             //itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_node_title_text_view);
-            mTypeTextView = (TextView) itemView.findViewById(R.id.list_item_type_node_title_text_view);
-            //mSubtitleTextView = (TextView) itemView.findViewById(R.id.list_item_node_parents_text_view);
+            mValuesTextView = (TextView) itemView.findViewById(R.id.list_item_node_values_text_view);
+            mParentsTextView = (TextView) itemView.findViewById(R.id.list_item_node_parents_text_view);
+            mProbabilitiesTextView = (TextView) itemView.findViewById(R.id.list_item_node_probabilities_text_view);
         }
 
         public void bindNode(Node node) {
             mNode = node;
-            mTitleTextView.setText(mNode.getName());
+            mTitleTextView.setText("Node: " + mNode.getName());
             //mTypeTextView.setText(mNode.isEvidence());
             //mSubtitleTextView.setText(mNode.getParents().toString());
         }
