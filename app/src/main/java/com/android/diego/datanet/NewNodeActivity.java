@@ -1,8 +1,11 @@
 package com.android.diego.datanet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +22,8 @@ import com.android.diego.datanet.Libraries.MultiSelectionSpinner;
 
 public class NewNodeActivity extends AppCompatActivity {
 
+    private Node mNode;
+    private EditText mNameField;
     private EditText mEditTextInField;
     private Button mButtonAdd;
     private LinearLayout mContainer;
@@ -28,6 +33,11 @@ public class NewNodeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_node);
 
+        mNode = new Node();
+
+        setNameNode();
+
+        /*
         String[] strings = { "Node1", "Node2", "Node3" };
 
         MultiSelectionSpinner mySpin = (MultiSelectionSpinner)findViewById(R.id.spinner);
@@ -35,7 +45,9 @@ public class NewNodeActivity extends AppCompatActivity {
 
         //List<String> selected = mySpin.getSelectedStrings();
 
-        addValues();
+        */
+
+        //addValues();
     }
 
     @Override
@@ -54,13 +66,37 @@ public class NewNodeActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_done_new_node) {
-            Toast.makeText(getApplicationContext(), "Done Pressed",
-                    Toast.LENGTH_LONG).show();
+            NodeStore.get(getBaseContext()).addNode(mNode);
+
+            Intent intent = new Intent(NewNodeActivity.this, NodeListActivity.class);
+            startActivity(intent);
         } else if (id == R.id.action_cancel_new_node) {
             this.onBackPressed();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setNameNode() {
+        mNameField = (EditText) findViewById(R.id.node_name);
+
+        mNameField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mNode.setName(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
     }
 
     private void addValues() {

@@ -41,12 +41,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <Button
+        <ImageButton
             android:id="@+id/add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="Add"/>
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_action_add"/>
+
         <EditText
             android:id="@+id/textin"
             android:layout_width="match_parent"

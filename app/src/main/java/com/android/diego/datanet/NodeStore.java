@@ -29,13 +29,6 @@ public class NodeStore {
     private NodeStore(Context context) {
         mNodes = new ArrayList<>();
 
-        for (int i = 0; i < 100; i++) {
-            Node node = new Node();
-            node.setName("Node #" + i);
-            //node.addParent("Parent: " + ++i);
-            mNodes.add(node);
-        }
-
     }
 
     public List<Node> getNodes() {

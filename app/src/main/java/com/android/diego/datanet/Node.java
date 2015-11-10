@@ -13,7 +13,7 @@ public class Node {
     private UUID mId;
     private String mName;
     private List<String> mValues;
-    private List<String> mParents;
+    private List<Node> mParents;
     private List<Double> mProbabilities;
 
     public Node() {
