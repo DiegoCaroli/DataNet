@@ -82,7 +82,8 @@ public class NodeListActivityFragment extends Fragment {
         public void bindNode(Node node) {
             mNode = node;
             mTitleTextView.setText("Node: " + mNode.getName());
-            //mTypeTextView.setText(mNode.isEvidence());
+            mValuesTextView.setText("Values: " + mNode.getValues().toString());
+            mParentsTextView.setText("Parents: " + mNode.getParents().toString());
             //mSubtitleTextView.setText(mNode.getParents().toString());
         }
 

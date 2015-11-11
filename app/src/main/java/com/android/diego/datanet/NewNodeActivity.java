@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.android.diego.datanet.Libraries.MultiSelectionSpinner;
 
@@ -58,6 +59,8 @@ public class NewNodeActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_done_new_node) {
+           setSelectedParents();
+
             NodeStore.get(getBaseContext()).addNode(mNode);
 
             Intent intent = new Intent(NewNodeActivity.this, NodeListActivity.class);
@@ -94,7 +97,7 @@ public class NewNodeActivity extends AppCompatActivity {
         NodeStore nodeStore = NodeStore.get(getBaseContext());
         List<Node> nodes = nodeStore.getNodes();
 
-        List<String> parentsNode = new ArrayList<String>();
+        List<String> parentsNode = new ArrayList<>();
 
         for (Node node : nodes) {
             parentsNode.add(node.getName());
@@ -108,9 +111,26 @@ public class NewNodeActivity extends AppCompatActivity {
         } else {
             mySpinner.setItems(parentsNode);
         }
+    }
 
+    private void setSelectedParents() {
+        NodeStore nodeStore = NodeStore.get(getBaseContext());
+        List<Node> nodes = nodeStore.getNodes();
 
-        //List<String> selected = mySpin.getSelectedStrings();
+        if (!nodes.isEmpty()) {
+            List<String> nodeSelected = mySpinner.getSelectedStrings();
+
+            List<UUID> nodeIDs = new ArrayList<>();
+
+            for (String nameNode : nodeSelected) {
+                UUID nodeID = nodeStore.getNodeID(nameNode);
+
+                if (nodeID != null) {
+                    nodeIDs.add(nodeID);
+                }
+            }
+            mNode.setParents(nodeIDs);
+        }
     }
 
     private void addValues() {

@@ -44,4 +44,13 @@ public class NodeStore {
         return null;
     }
 
+    public UUID getNodeID(String name) {
+        for (Node node : mNodes) {
+            if (node.getName().equals(name)) {
+                return node.getId();
+            }
+        }
+        return null;
+    }
+
 }

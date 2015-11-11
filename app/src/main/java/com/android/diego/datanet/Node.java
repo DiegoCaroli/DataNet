@@ -13,7 +13,7 @@ public class Node {
     private UUID mId;
     private String mName;
     private List<String> mValues;
-    private List<Node> mParents;
+    private List<UUID> mParents;
     private List<Double> mProbabilities;
 
     public Node() {
@@ -44,11 +44,11 @@ public class Node {
         mValues = values;
     }
 
-    public List<Node> getParents() {
+    public List<UUID> getParents() {
         return mParents;
     }
 
-    public void setParents(List<Node> parents) {
+    public void setParents(List<UUID> parents) {
         mParents = parents;
     }
 
