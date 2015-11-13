@@ -18,6 +18,8 @@ public class NodeListActivity extends AppCompatActivity {
     private NodeStore mNodeStore;
     private List<Node> mNodes;
 
+    private static final String EXTRA_NET_NAME = "com.android.diego.datanet.net_name";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,12 +31,9 @@ public class NodeListActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
         //actionBar.setDisplayHomeAsUpEnabled(true);
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            mNameNet = extras.getString("EXTRA_NET_NAME");
-        }
-        
-        setTitle(mNameNet);
+        mNameNet = getIntent().getStringExtra(EXTRA_NET_NAME);
+
+        actionBar.setTitle(mNameNet);
 
         mNodeStore = NodeStore.get(getBaseContext());
         mNodes = mNodeStore.getNodes();
@@ -58,13 +57,20 @@ public class NodeListActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_new_node) {
             Intent intent = new Intent(NodeListActivity.this, NewNodeActivity.class);
+            intent.putExtra(EXTRA_NET_NAME, mNameNet);
             startActivity(intent);
         } else if (id == R.id.action_done) {
             Toast.makeText(getApplicationContext(), "Done Pressed",
                     Toast.LENGTH_LONG).show();
-            String fileNameCSV = mNameNet + ".csv";
-            File fileCSV = new File(getBaseContext().getFilesDir(), fileNameCSV);
-            CsvFileWriter.writeCsvFile(fileCSV, mNodes);
+            if (mNodes.size() > 0) {
+                String fileNameCSV = mNameNet + ".csv";
+                File fileCSV = new File(getBaseContext().getFilesDir(), fileNameCSV);
+                CsvFileWriter.writeCsvFile(fileCSV, mNodes);
+            } else {
+                Toast.makeText(getApplicationContext(), "You can't do it.",
+                        Toast.LENGTH_LONG).show();
+            }
+
 
         }
 

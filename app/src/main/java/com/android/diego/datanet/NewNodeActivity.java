@@ -32,6 +32,7 @@ public class NewNodeActivity extends AppCompatActivity {
     private LinearLayout mContainer;
     private MultiSelectionSpinner mySpinner;
 
+    private static final String EXTRA_NET_NAME = "com.android.diego.datanet.net_name";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,7 @@ public class NewNodeActivity extends AppCompatActivity {
             NodeStore.get(getBaseContext()).addNode(mNode);
 
             Intent intent = new Intent(NewNodeActivity.this, NodeListActivity.class);
+            intent.putExtra(EXTRA_NET_NAME, getIntent().getStringExtra(EXTRA_NET_NAME));
             startActivity(intent);
         } else if (id == R.id.action_cancel_new_node) {
             this.onBackPressed();
