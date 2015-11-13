@@ -1,6 +1,5 @@
 package com.android.diego.datanet;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -40,8 +39,8 @@ public class Node {
         return mValues;
     }
 
-    public void setValues(List<String> values) {
-        mValues = values;
+    public void setValues(String value) {
+        mValues.add(value);
     }
 
     public List<UUID> getParents() {

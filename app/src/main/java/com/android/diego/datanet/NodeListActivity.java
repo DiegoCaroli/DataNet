@@ -2,17 +2,21 @@ package com.android.diego.datanet;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
+import java.io.File;
+import java.util.List;
+
 public class NodeListActivity extends AppCompatActivity {
+
+    private String mNameNet;
+    private NodeStore mNodeStore;
+    private List<Node> mNodes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,17 @@ public class NodeListActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
         //actionBar.setDisplayHomeAsUpEnabled(true);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            mNameNet = extras.getString("EXTRA_NET_NAME");
+        }
+        
+        setTitle(mNameNet);
+
+        mNodeStore = NodeStore.get(getBaseContext());
+        mNodes = mNodeStore.getNodes();
+
     }
 
     @Override
@@ -47,6 +62,10 @@ public class NodeListActivity extends AppCompatActivity {
         } else if (id == R.id.action_done) {
             Toast.makeText(getApplicationContext(), "Done Pressed",
                     Toast.LENGTH_LONG).show();
+            String fileNameCSV = mNameNet + ".csv";
+            File fileCSV = new File(getBaseContext().getFilesDir(), fileNameCSV);
+            CsvFileWriter.writeCsvFile(fileCSV, mNodes);
+
         }
 
         return super.onOptionsItemSelected(item);

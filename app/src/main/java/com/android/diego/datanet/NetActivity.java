@@ -15,6 +15,7 @@ public class NetActivity extends AppCompatActivity {
     private Net mNet;
     private EditText mNetField;
     private Button mNextButton;
+    private static final String EXTRA_NET_NAME = "com.android.diego.datanet.net_name";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class NetActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.empty_name_net, Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(NetActivity.this, NodeListActivity.class);
+            intent.putExtra(EXTRA_NET_NAME, mNet.getName());
             startActivity(intent);
         }
     }
