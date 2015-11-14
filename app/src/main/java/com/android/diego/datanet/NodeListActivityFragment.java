@@ -84,7 +84,7 @@ public class NodeListActivityFragment extends Fragment {
             mTitleTextView.setText("Node: " + mNode.getName());
             mValuesTextView.setText("Values: " + mNode.getValues().toString());
             mParentsTextView.setText("Parents: " + mNode.getParents().toString());
-            //mSubtitleTextView.setText(mNode.getParents().toString());
+            mProbabilitiesTextView.setText("Probabilities: " + mNode.getProbabilities().toString());
         }
 
         /*

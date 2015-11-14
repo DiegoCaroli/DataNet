@@ -65,7 +65,7 @@ public class NodeListActivity extends AppCompatActivity {
             if (mNodes.size() > 0) {
                 String fileNameCSV = mNameNet + ".csv";
                 File fileCSV = new File(getBaseContext().getFilesDir(), fileNameCSV);
-                CsvFileWriter.writeCsvFile(fileCSV, mNodes);
+                CsvFileWriter.writeCsvFile(fileCSV, mNodeStore);
             } else {
                 Toast.makeText(getApplicationContext(), "You can't do it.",
                         Toast.LENGTH_LONG).show();
