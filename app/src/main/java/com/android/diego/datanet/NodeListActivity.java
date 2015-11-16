@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Xml;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -66,6 +67,10 @@ public class NodeListActivity extends AppCompatActivity {
                 String fileNameCSV = mNameNet + ".csv";
                 File fileCSV = new File(getBaseContext().getFilesDir(), fileNameCSV);
                 CsvFileWriter.writeCsvFile(fileCSV, mNodeStore);
+
+                String fileNameXML = mNameNet + ".xml";
+                File fileXML = new File(getBaseContext().getFilesDir(), fileNameXML);
+                XmlFileWriter.writeXmlFile(fileXML, mNodeStore);
             } else {
                 Toast.makeText(getApplicationContext(), "You can't do it.",
                         Toast.LENGTH_LONG).show();

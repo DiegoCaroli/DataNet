@@ -23,6 +23,7 @@ public class CsvFileWriter {
 
     public static void writeCsvFile(File fileName, NodeStore nodeStore) {
         PrintWriter outputStream = null;
+
         try {
             outputStream = new PrintWriter(new FileOutputStream(fileName));
         } catch (FileNotFoundException e) {
