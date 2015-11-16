@@ -193,13 +193,14 @@ public class NewNodeActivity extends AppCompatActivity {
         for(int j = 0; j < tot_conf; j++) {
             if (mNode.getValues().size() % 2 == 0 || mNode.getValues().size() == 1) {
                 probs.add(Double.valueOf(decimalFormat.format(prob)));
+            } else if (mNode.getValues().size() % 3 == 0 && j % mNode.getValues().size() == mNode.getValues().size()-1) {
+                double newProb = prob + 0.01;
+                probs.add(Double.valueOf(decimalFormat.format(newProb)));
+            } else if (mNode.getValues().size() % 7 == 0 && j % mNode.getValues().size() == mNode.getValues().size()-1) {
+                double newProb = prob + 0.02;
+                probs.add(Double.valueOf(decimalFormat.format(newProb)));
             } else {
-                if (j % mNode.getValues().size() == mNode.getValues().size()-1) {
-                    double newProb = prob + 0.01;
-                    probs.add(Double.valueOf(decimalFormat.format(newProb)));
-                } else {
-                    probs.add(Double.valueOf(decimalFormat.format(prob)));
-                }
+                probs.add(Double.valueOf(decimalFormat.format(prob)));
             }
         }
         return probs;

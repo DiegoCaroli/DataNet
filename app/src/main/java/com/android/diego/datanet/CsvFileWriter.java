@@ -15,7 +15,6 @@ public class CsvFileWriter {
     //Delimiter used in CSV file
     private static final String SEMICOLON_DELIMITER = ";";
     private static final String COLON_DELIMITER = ":";
-    private static final String NEW_LINE_SEPARATOR = "\n";
 
     //CSV file header
     private static final String FILE_HEADER = "attivo;nodo;valori;padri;probability";
