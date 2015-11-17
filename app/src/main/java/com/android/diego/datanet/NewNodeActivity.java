@@ -1,7 +1,9 @@
 package com.android.diego.datanet;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,13 +12,17 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,8 +36,10 @@ public class NewNodeActivity extends AppCompatActivity {
     private EditText mNameField;
     private EditText mEditTextInField;
     private ImageButton mButtonAdd;
-    private LinearLayout mContainer;
     private MultiSelectionSpinner mySpinner;
+    private ListView mListView;
+    private List<String> mValues;
+    private ArrayAdapter<String> adapter;
 
     private static final String EXTRA_NET_NAME = "com.android.diego.datanet.net_name";
 
@@ -67,7 +75,9 @@ public class NewNodeActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_done_new_node) {
             setSelectedParents();
+
             setProbabilies();
+
 
             NodeStore.get(getBaseContext()).addNode(mNode);
 
@@ -137,29 +147,77 @@ public class NewNodeActivity extends AppCompatActivity {
     }
 
     private void addValues() {
+        mListView = (ListView) findViewById(R.id.listView);
+        mValues = new ArrayList<>();
+        adapter = new ArrayAdapter<>(this, R.layout.row_values, mValues);
+        mListView.setAdapter(adapter);
+
         mEditTextInField = (EditText)findViewById(R.id.textin);
         mButtonAdd = (ImageButton)findViewById(R.id.add);
-        mContainer = (LinearLayout)findViewById(R.id.container);
 
         mButtonAdd.setOnClickListener(new View.OnClickListener() {
-
             @Override
-            public void onClick(View arg0) {
-                LayoutInflater layoutInflater =
-                        (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                final View addView = layoutInflater.inflate(R.layout.row_values, null);
-                TextView textOut = (TextView) addView.findViewById(R.id.textout);
-                textOut.setTextSize(18);
+            public void onClick(View v) {
                 if (mEditTextInField.getText().toString().length() > 0) {
-                    textOut.setText("Value: " + mEditTextInField.getText().toString());
+                    mValues.add("Value: " + mEditTextInField.getText().toString());
                     mNode.setValues(mEditTextInField.getText().toString());
                     mEditTextInField.setText("");
-
-                    mContainer.addView(addView);
+                    adapter.notifyDataSetChanged();
                 }
             }
         });
+
+        /*
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                removeItemFromList(position);
+            }
+        });
+        */
+        mListView.setOnItemLongClickListener(new ListView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                removeItemFromList(position);
+                return true;
+            }
+        });
     }
+
+    private void removeItemFromList(int position) {
+        final int deletePosition = position;
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(
+                NewNodeActivity.this);
+
+        alert.setTitle("Delete");
+        alert.setMessage("Do you want delete this item?");
+        alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TOD O Auto-generated method stub
+
+                // main code on after clicking yes
+                mValues.remove(deletePosition);
+                mNode.removeValues(deletePosition);
+                adapter.notifyDataSetChanged();
+                adapter.notifyDataSetInvalidated();
+
+            }
+        });
+        alert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                dialog.dismiss();
+            }
+        });
+
+        alert.show();
+    }
+
+
+
 
     private void setProbabilies() {
         int i = 1;

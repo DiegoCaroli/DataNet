@@ -58,12 +58,11 @@
             android:hint="@string/values_hint"/>
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/container"
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-    </LinearLayout>
+        android:layout_height="wrap_content" >
+    </ListView>
 
 
 </LinearLayout>

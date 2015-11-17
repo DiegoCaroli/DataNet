@@ -42,6 +42,9 @@ public class Node {
     public void setValues(String value) {
         mValues.add(value);
     }
+    public void removeValues(int pos) {
+        mValues.remove(pos);
+    }
 
     public List<UUID> getParents() {
         return mParents;
