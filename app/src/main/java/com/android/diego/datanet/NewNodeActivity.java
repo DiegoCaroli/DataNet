@@ -38,7 +38,6 @@ public class NewNodeActivity extends AppCompatActivity {
     private ImageButton mButtonAdd;
     private MultiSelectionSpinner mySpinner;
     private ListView mListView;
-    private List<String> mValues;
     private ArrayAdapter<String> adapter;
 
     private static final String EXTRA_NET_NAME = "com.android.diego.datanet.net_name";
@@ -75,9 +74,7 @@ public class NewNodeActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_done_new_node) {
             setSelectedParents();
-            setValues();
             setProbabilies();
-
 
             NodeStore.get(getBaseContext()).addNode(mNode);
 
@@ -148,8 +145,7 @@ public class NewNodeActivity extends AppCompatActivity {
 
     private void addValues() {
         mListView = (ListView) findViewById(R.id.listView);
-        mValues = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, R.layout.row_values, mValues);
+        adapter = new ArrayAdapter<>(this, R.layout.row_values, mNode.getValues());
         mListView.setAdapter(adapter);
 
         mEditTextInField = (EditText)findViewById(R.id.textin);
@@ -159,7 +155,7 @@ public class NewNodeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mEditTextInField.getText().toString().length() > 0) {
-                    mValues.add("Value: " + mEditTextInField.getText().toString());
+                    mNode.addValue(mEditTextInField.getText().toString());
                     mEditTextInField.setText("");
                     adapter.notifyDataSetChanged();
                 }
@@ -189,21 +185,20 @@ public class NewNodeActivity extends AppCompatActivity {
         AlertDialog.Builder alert = new AlertDialog.Builder(
                 NewNodeActivity.this);
 
-        alert.setTitle("Delete");
-        alert.setMessage("Do you want delete this item?");
-        alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        alert.setTitle(R.string.delete_alert);
+        alert.setMessage(R.string.delete_value_message);
+        alert.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // TOD O Auto-generated method stub
 
                 // main code on after clicking yes
-                mValues.remove(deletePosition);
+                mNode.removeValue(deletePosition);
                 adapter.notifyDataSetChanged();
                 adapter.notifyDataSetInvalidated();
-
             }
         });
-        alert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
@@ -214,20 +209,13 @@ public class NewNodeActivity extends AppCompatActivity {
         alert.show();
     }
 
-    private void setValues() {
-        mNode.setValues(mValues);
-    }
-
-
     private void setProbabilies() {
         int i = 1;
         if (mNode.getParents().isEmpty()) {
             int tot_conf = mNode.getValues().size() * i;
             double prob = 1.0 / mNode.getValues().size();
 
-            List<Double> probs = calculateProbabilities(tot_conf, prob);
-
-            mNode.setProbabilities(probs);
+            calculateProbabilities(tot_conf, prob);
         } else {
             for (UUID nodeID : mNode.getParents()) {
                 Node node = mNodeStore.getNode(nodeID);
@@ -236,32 +224,27 @@ public class NewNodeActivity extends AppCompatActivity {
                 int tot_conf = mNode.getValues().size() * i;
                 double prob = 1.0 / mNode.getValues().size();
 
-                List<Double> probs = calculateProbabilities(tot_conf, prob);
-
-                mNode.setProbabilities(probs);
+                calculateProbabilities(tot_conf, prob);
             }
         }
     }
 
-    private List<Double> calculateProbabilities(int tot_conf, double prob) {
+    private void calculateProbabilities(int tot_conf, double prob) {
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
-
-        List<Double> probs = new ArrayList<>(tot_conf);
 
         for(int j = 0; j < tot_conf; j++) {
             if (mNode.getValues().size() % 2 == 0 || mNode.getValues().size() == 1) {
-                probs.add(Double.valueOf(decimalFormat.format(prob)));
-            } else if (mNode.getValues().size() % 3 == 0 && j % mNode.getValues().size() == mNode.getValues().size()-1) {
+                mNode.addProbability(Double.valueOf(decimalFormat.format(prob)));
+            } else if (mNode.getValues().size() % 2 == 0 && j % mNode.getValues().size() == mNode.getValues().size()-1) {
                 double newProb = prob + 0.01;
-                probs.add(Double.valueOf(decimalFormat.format(newProb)));
+                mNode.addProbability(Double.valueOf(decimalFormat.format(newProb)));
             } else if (mNode.getValues().size() % 7 == 0 && j % mNode.getValues().size() == mNode.getValues().size()-1) {
                 double newProb = prob + 0.02;
-                probs.add(Double.valueOf(decimalFormat.format(newProb)));
+                mNode.addProbability(Double.valueOf(decimalFormat.format(newProb)));
             } else {
-                probs.add(Double.valueOf(decimalFormat.format(prob)));
+                mNode.addProbability(Double.valueOf(decimalFormat.format(prob)));
             }
         }
-        return probs;
     }
 
 }

@@ -39,10 +39,6 @@ public class Node {
         return mValues;
     }
 
-    public void setValues(List<String> values) {
-        mValues = values;
-    }
-
     public List<UUID> getParents() {
         return mParents;
     }
@@ -55,7 +51,15 @@ public class Node {
         return mProbabilities;
     }
 
-    public void setProbabilities(List<Double> probabilities) {
-        mProbabilities = probabilities;
+    public void addValue (String value) {
+        mValues.add(value);
+    }
+
+    public void removeValue (int position) {
+        mValues.remove(position);
+    }
+
+    public void addProbability (Double prob) {
+        mProbabilities.add(prob);
     }
 }

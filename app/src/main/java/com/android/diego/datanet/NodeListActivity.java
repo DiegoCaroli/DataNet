@@ -71,6 +71,8 @@ public class NodeListActivity extends AppCompatActivity {
                 String fileNameXML = mNameNet + ".xml";
                 File fileXML = new File(getBaseContext().getFilesDir(), fileNameXML);
                 fileWriter.writeXmlFile(fileXML);
+
+                Toast.makeText(getApplicationContext(), R.string.file_create, Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(getApplicationContext(), R.string.net_empty,
                         Toast.LENGTH_LONG).show();
