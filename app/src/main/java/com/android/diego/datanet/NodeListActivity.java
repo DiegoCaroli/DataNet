@@ -61,19 +61,18 @@ public class NodeListActivity extends AppCompatActivity {
             intent.putExtra(EXTRA_NET_NAME, mNameNet);
             startActivity(intent);
         } else if (id == R.id.action_done) {
-            Toast.makeText(getApplicationContext(), "Done Pressed",
-                    Toast.LENGTH_LONG).show();
             if (mNodes.size() > 0) {
+                FileWriter fileWriter = new FileWriter(mNodeStore);
+
                 String fileNameCSV = mNameNet + ".csv";
                 File fileCSV = new File(getBaseContext().getFilesDir(), fileNameCSV);
-                CsvFileWriter.writeCsvFile(fileCSV, mNodeStore);
+                fileWriter.writeCsvFile(fileCSV);
 
-                XmlFileWriter xmlFileWriter = new XmlFileWriter(mNodeStore);
                 String fileNameXML = mNameNet + ".xml";
                 File fileXML = new File(getBaseContext().getFilesDir(), fileNameXML);
-                xmlFileWriter.writeXmlFile(fileXML);
+                fileWriter.writeXmlFile(fileXML);
             } else {
-                Toast.makeText(getApplicationContext(), "You can't do it.",
+                Toast.makeText(getApplicationContext(), R.string.net_empty,
                         Toast.LENGTH_LONG).show();
             }
 

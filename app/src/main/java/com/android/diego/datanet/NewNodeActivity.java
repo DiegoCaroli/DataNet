@@ -75,7 +75,7 @@ public class NewNodeActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_done_new_node) {
             setSelectedParents();
-
+            setValues();
             setProbabilies();
 
 
@@ -160,7 +160,6 @@ public class NewNodeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (mEditTextInField.getText().toString().length() > 0) {
                     mValues.add("Value: " + mEditTextInField.getText().toString());
-                    mNode.setValues(mEditTextInField.getText().toString());
                     mEditTextInField.setText("");
                     adapter.notifyDataSetChanged();
                 }
@@ -199,7 +198,6 @@ public class NewNodeActivity extends AppCompatActivity {
 
                 // main code on after clicking yes
                 mValues.remove(deletePosition);
-                mNode.removeValues(deletePosition);
                 adapter.notifyDataSetChanged();
                 adapter.notifyDataSetInvalidated();
 
@@ -216,7 +214,9 @@ public class NewNodeActivity extends AppCompatActivity {
         alert.show();
     }
 
-
+    private void setValues() {
+        mNode.setValues(mValues);
+    }
 
 
     private void setProbabilies() {

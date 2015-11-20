@@ -39,11 +39,8 @@ public class Node {
         return mValues;
     }
 
-    public void setValues(String value) {
-        mValues.add(value);
-    }
-    public void removeValues(int pos) {
-        mValues.remove(pos);
+    public void setValues(List<String> values) {
+        mValues = values;
     }
 
     public List<UUID> getParents() {
