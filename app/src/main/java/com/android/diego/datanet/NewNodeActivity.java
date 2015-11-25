@@ -1,6 +1,5 @@
 package com.android.diego.datanet;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -8,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,13 +14,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,6 +37,7 @@ public class NewNodeActivity extends AppCompatActivity {
     private ListView mListView;
     private ArrayAdapter<String> adapter;
 
+    private static final String URL_SERVER = "http://";
     private static final String EXTRA_NET_NAME = "com.android.diego.datanet.net_name";
 
     @Override
@@ -213,7 +211,10 @@ public class NewNodeActivity extends AppCompatActivity {
         int i = 1;
         if (mNode.getParents().isEmpty()) {
             int tot_conf = mNode.getValues().size() * i;
-            double prob = 1.0 / mNode.getValues().size();
+
+            BigDecimal valOne = new BigDecimal(1);
+            BigDecimal valSize = new BigDecimal(mNode.getValues().size());
+            BigDecimal prob = valOne.divide(valSize, 11, RoundingMode.HALF_UP);
 
             calculateProbabilities(tot_conf, prob);
         } else {
@@ -222,27 +223,56 @@ public class NewNodeActivity extends AppCompatActivity {
                 i *= node.getValues().size();
 
                 int tot_conf = mNode.getValues().size() * i;
-                double prob = 1.0 / mNode.getValues().size();
+
+                BigDecimal valOne = new BigDecimal(1.0);
+                BigDecimal valSize = new BigDecimal(mNode.getValues().size());
+                BigDecimal prob = valOne.divide(valSize, 11, RoundingMode.HALF_UP);
 
                 calculateProbabilities(tot_conf, prob);
             }
         }
     }
 
-    private void calculateProbabilities(int tot_conf, double prob) {
-        DecimalFormat decimalFormat = new DecimalFormat("0.00");
-
+    private void calculateProbabilities(int tot_conf, BigDecimal prob) {
         for(int j = 0; j < tot_conf; j++) {
-            if (mNode.getValues().size() % 2 == 0 || mNode.getValues().size() == 1) {
-                mNode.addProbability(Double.valueOf(decimalFormat.format(prob)));
-            } else if (mNode.getValues().size() % 2 == 0 && j % mNode.getValues().size() == mNode.getValues().size()-1) {
-                double newProb = prob + 0.01;
-                mNode.addProbability(Double.valueOf(decimalFormat.format(newProb)));
-            } else if (mNode.getValues().size() % 7 == 0 && j % mNode.getValues().size() == mNode.getValues().size()-1) {
-                double newProb = prob + 0.02;
-                mNode.addProbability(Double.valueOf(decimalFormat.format(newProb)));
+            if (mNode.getValues().size() == 1) {
+                mNode.addProbability(prob.round(new MathContext(2, RoundingMode.HALF_UP)));
+            } else if (mNode.getValues().size() > 1 && mNode.getValues().size() <= 10) {
+                if (mNode.getValues().size() % 2 == 0) {
+                    if (mNode.getValues().size() % 6 == 0) {
+                        mNode.addProbability(prob.round(new MathContext(11, RoundingMode.HALF_UP)));
+                    } else {
+                        mNode.addProbability(prob.round(new MathContext(3, RoundingMode.HALF_UP)));
+                    }
+                } else {
+                    if (mNode.getValues().size() % 5 == 0) {
+                        mNode.addProbability(prob.round(new MathContext(2, RoundingMode.HALF_UP)));
+                    } else {
+                        if (mNode.getValues().size() % 2 == 1 && j % mNode.getValues().size() == mNode.getValues().size() - 1) {
+                            mNode.addProbability(prob.round(new MathContext(6, RoundingMode.CEILING)));
+                        } else {
+                            mNode.addProbability(prob.round(new MathContext(6, RoundingMode.HALF_UP)));
+                        }
+                    }
+                }
             } else {
-                mNode.addProbability(Double.valueOf(decimalFormat.format(prob)));
+                if (mNode.getValues().size() % 2 == 0) {
+                    if (mNode.getValues().size() % 6 == 0) {
+                        mNode.addProbability(prob.round(new MathContext(11, RoundingMode.HALF_UP)));
+                    } else {
+                        mNode.addProbability(prob.round(new MathContext(3, RoundingMode.HALF_UP)));
+                    }
+                } else {
+                    if (mNode.getValues().size() % 5 == 0) {
+                        mNode.addProbability(prob.round(new MathContext(2, RoundingMode.HALF_UP)));
+                    } else {
+                        if (mNode.getValues().size() % 2 == 1 && j % mNode.getValues().size() == mNode.getValues().size() - 1) {
+                            mNode.addProbability(prob.round(new MathContext(5, RoundingMode.CEILING)));
+                        } else {
+                            mNode.addProbability(prob.round(new MathContext(5, RoundingMode.HALF_UP)));
+                        }
+                    }
+                }
             }
         }
     }

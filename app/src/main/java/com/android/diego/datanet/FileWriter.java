@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -100,7 +101,7 @@ public class FileWriter {
         }
 
         //probability elements
-        List<Double> prob = node.getProbabilities();
+        List<BigDecimal> prob = node.getProbabilities();
         String sProbabilities = "";
 
         for (int i = 0; i < prob.size(); i++) {
@@ -176,7 +177,7 @@ public class FileWriter {
             outputStream.print(SEMICOLON_DELIMITER);
 
             //Write the probabilities of the node
-            List<Double> probabilities = node.getProbabilities();
+            List<BigDecimal> probabilities = node.getProbabilities();
             for (int i = 0; i < probabilities.size(); i++) {
                 if (i == probabilities.size() - 1) {
                     outputStream.print(probabilities.get(i));

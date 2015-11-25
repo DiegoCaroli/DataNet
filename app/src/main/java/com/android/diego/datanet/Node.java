@@ -1,5 +1,6 @@
 package com.android.diego.datanet;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -13,7 +14,7 @@ public class Node {
     private String mName;
     private List<String> mValues;
     private List<UUID> mParents;
-    private List<Double> mProbabilities;
+    private List<BigDecimal> mProbabilities;
 
     public Node() {
         mId = UUID.randomUUID();
@@ -47,7 +48,7 @@ public class Node {
         mParents = parents;
     }
 
-    public List<Double> getProbabilities() {
+    public List<BigDecimal> getProbabilities() {
         return mProbabilities;
     }
 
@@ -59,7 +60,7 @@ public class Node {
         mValues.remove(position);
     }
 
-    public void addProbability (Double prob) {
+    public void addProbability (BigDecimal prob) {
         mProbabilities.add(prob);
     }
 }
