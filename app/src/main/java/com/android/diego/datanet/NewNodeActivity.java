@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -71,14 +72,19 @@ public class NewNodeActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_done_new_node) {
-            setSelectedParents();
-            setProbabilies();
+            if (mNode.getName().length() > 0 && mNode.getValues().size() > 0) {
+                setSelectedParents();
+                setProbabilies();
 
-            NodeStore.get(getBaseContext()).addNode(mNode);
+                NodeStore.get(getBaseContext()).addNode(mNode);
 
-            Intent intent = new Intent(NewNodeActivity.this, NodeListActivity.class);
-            intent.putExtra(EXTRA_NET_NAME, getIntent().getStringExtra(EXTRA_NET_NAME));
-            startActivity(intent);
+                Intent intent = new Intent(NewNodeActivity.this, NodeListActivity.class);
+                intent.putExtra(EXTRA_NET_NAME, getIntent().getStringExtra(EXTRA_NET_NAME));
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, R.string.name_values_node, Toast.LENGTH_SHORT).show();
+            }
+
         } else if (id == R.id.action_cancel_new_node) {
             this.onBackPressed();
         }
@@ -209,28 +215,24 @@ public class NewNodeActivity extends AppCompatActivity {
 
     private void setProbabilies() {
         int i = 1;
+        int tot_conf = 0;
+
         if (mNode.getParents().isEmpty()) {
-            int tot_conf = mNode.getValues().size() * i;
-
-            BigDecimal valOne = new BigDecimal(1);
-            BigDecimal valSize = new BigDecimal(mNode.getValues().size());
-            BigDecimal prob = valOne.divide(valSize, 11, RoundingMode.HALF_UP);
-
-            calculateProbabilities(tot_conf, prob);
+            tot_conf = mNode.getValues().size() * i;
         } else {
             for (UUID nodeID : mNode.getParents()) {
                 Node node = mNodeStore.getNode(nodeID);
                 i *= node.getValues().size();
 
-                int tot_conf = mNode.getValues().size() * i;
+                tot_conf = mNode.getValues().size() * i;
 
-                BigDecimal valOne = new BigDecimal(1.0);
-                BigDecimal valSize = new BigDecimal(mNode.getValues().size());
-                BigDecimal prob = valOne.divide(valSize, 11, RoundingMode.HALF_UP);
-
-                calculateProbabilities(tot_conf, prob);
             }
         }
+        BigDecimal valOne = new BigDecimal(1);
+        BigDecimal valSize = new BigDecimal(mNode.getValues().size());
+        BigDecimal prob = valOne.divide(valSize, 11, RoundingMode.HALF_UP);
+
+        calculateProbabilities(tot_conf, prob);
     }
 
     private void calculateProbabilities(int tot_conf, BigDecimal prob) {

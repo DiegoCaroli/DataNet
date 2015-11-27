@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.android.diego.datanet.NodeListActivity">
+    <item android:id="@+id/action_create_net_from_file"
+          android:title="@string/menu_create_net_from_file"
+          android:orderInCategory="100"
+          app:showAsAction="always"
+          android:icon="@drawable/ic_action_upload"/>
+</menu>

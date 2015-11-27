@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.android.diego.datanet.Libraries.DividerItemDecoration;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -83,7 +84,23 @@ public class NodeListActivityFragment extends Fragment {
             mNode = node;
             mTitleTextView.setText("Node: " + mNode.getName());
             mValuesTextView.setText("Values: " + mNode.getValues().toString());
-            mParentsTextView.setText("Parents: " + mNode.getParents().toString());
+
+            NodeStore mNodeStore = NodeStore.get(getContext());
+            List<UUID> mParents = mNode.getParents();
+            String parents = "";
+            for(int i = 0; i < mParents.size(); i++) {
+                if (i == mParents.size() - 1) {
+                    parents += mNodeStore.getNode(mParents.get(i)).getName();
+                } else {
+                    parents += mNodeStore.getNode(mParents.get(i)).getName() +  ", ";
+                }
+            }
+            if (mParents.isEmpty()) {
+                mParentsTextView.setText("Parents: None");
+            } else {
+                mParentsTextView.setText("Parents: " + parents);
+            }
+
             mProbabilitiesTextView.setText("Probabilities: " + mNode.getProbabilities().toString());
         }
 

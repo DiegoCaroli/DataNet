@@ -11,6 +11,7 @@
     <string name="next_button">Next</string>
     <string name="done_button">Done</string>
 
+    <string name="menu_create_net_from_file">Create</string>
     <string name="menu_new_node">New Node</string>
     <string name="menu_done">Done</string>
     <string name="menu_done_new_node">Done</string>
@@ -33,5 +34,7 @@
 
     <string name="yes">YES</string>
     <string name="cancel">CANCEL</string>
+
+    <string name="name_values_node">You can\'t continue. Check if you have inserted the name and the values for the node.</string>
 
 </resources>
