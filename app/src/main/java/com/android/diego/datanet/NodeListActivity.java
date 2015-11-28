@@ -5,13 +5,22 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Xml;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
+
 
 public class NodeListActivity extends AppCompatActivity {
 
@@ -20,6 +29,7 @@ public class NodeListActivity extends AppCompatActivity {
     private List<Node> mNodes;
 
     private static final String EXTRA_NET_NAME = "com.android.diego.datanet.net_name";
+    private static final String URL_SERVER = "http://localhost:8080/BayesService/upload/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +83,9 @@ public class NodeListActivity extends AppCompatActivity {
                 fileWriter.writeXmlFile(fileXML);
 
                 Toast.makeText(getApplicationContext(), R.string.file_create, Toast.LENGTH_LONG).show();
+
+                uploadFile(fileCSV);
+
             } else {
                 Toast.makeText(getApplicationContext(), R.string.net_empty,
                         Toast.LENGTH_LONG).show();
@@ -82,5 +95,30 @@ public class NodeListActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void uploadFile(File filePath) {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        try {
+            params.put("file", filePath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        client.post("http://10.0.2.2:8080/BayesService/upload", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                Toast.makeText(getApplicationContext(), "200",
+                        Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(getApplicationContext(), "400",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 }
