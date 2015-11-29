@@ -10,7 +10,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NetActivity">
+        <activity android:name=".NavigationDrawerActivity"
+                  android:theme="@style/NavigationDrawerTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -25,8 +26,6 @@
         <activity
             android:name=".NewNodeActivity"
             android:label="@string/title_activity_new_node">
-        </activity>
-        <activity android:name=".CreateNetFromFileActivity">
         </activity>
     </application>
 

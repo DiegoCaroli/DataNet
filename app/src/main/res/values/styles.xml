@@ -8,6 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="NavigationDrawerTheme" parent="MaterialNavigationDrawerTheme">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="learningPattern">false</item>
+    </style>
+
     <style name="Theme.AppBar.Normal" parent="ThemeOverlay.AppCompat.Dark">
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
     </style>

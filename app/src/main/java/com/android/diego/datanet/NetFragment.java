@@ -1,32 +1,36 @@
 package com.android.diego.datanet;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class NetActivity extends AppCompatActivity {
+public class NetFragment extends Fragment {
 
     private Net mNet;
     private EditText mNetField;
     private Button mNextButton;
     private static final String EXTRA_NET_NAME = "com.android.diego.datanet.net_name";
 
+    public NetFragment() {
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_net);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_net, container, false);
 
         mNet = new Net();
 
-        mNetField = (EditText) findViewById(R.id.edit_net);
+        mNetField = (EditText) view.findViewById(R.id.edit_net);
         mNetField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -44,42 +48,22 @@ public class NetActivity extends AppCompatActivity {
             }
         });
 
-        mNextButton = (Button) findViewById(R.id.next_insert_net);
+        mNextButton = (Button) view.findViewById(R.id.next_insert_net);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkNameNet();
             }
         });
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_net, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_create_net_from_file) {
-            Toast.makeText(this, "Upload", Toast.LENGTH_SHORT).show();
-        }
-
-        return super.onOptionsItemSelected(item);
+        return view;
     }
 
     private void checkNameNet() {
         if (mNet.getName().length() == 0) {
-            Toast.makeText(this, R.string.empty_name_net, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.empty_name_net, Toast.LENGTH_SHORT).show();
         } else {
-            Intent intent = new Intent(NetActivity.this, NodeListActivity.class);
+            Intent intent = new Intent(getActivity(), NodeListActivity.class);
             intent.putExtra(EXTRA_NET_NAME, mNet.getName());
             startActivity(intent);
         }
