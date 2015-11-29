@@ -1,6 +1,8 @@
 package com.android.diego.datanet;
 
 
+import com.android.diego.datanet.Model.*;
+
 import org.w3c.dom.*;
 import org.w3c.dom.Node;
 
@@ -35,7 +37,7 @@ public class FileWriter {
     }
 
     public void writeXmlFile(File fileName) {
-        List<com.android.diego.datanet.Node> nodes = nodeStore.getNodes();
+        List<com.android.diego.datanet.Model.Node> nodes = nodeStore.getNodes();
 
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -50,7 +52,7 @@ public class FileWriter {
             //append first child element to root element
 
 
-            for (com.android.diego.datanet.Node node : nodes) {
+            for (com.android.diego.datanet.Model.Node node : nodes) {
                 rootElement.appendChild(newNode(doc, node));
             }
 
@@ -72,7 +74,7 @@ public class FileWriter {
         }
     }
 
-    private Node newNode(Document doc, com.android.diego.datanet.Node node) {
+    private Node newNode(Document doc, com.android.diego.datanet.Model.Node node) {
         //node element
         Element nodeEl = doc.createElement("node");
 
@@ -95,7 +97,7 @@ public class FileWriter {
             nodeEl.appendChild(parent);
 
             for (UUID par: parents) {
-                com.android.diego.datanet.Node nodeP = nodeStore.getNode(par);
+                com.android.diego.datanet.Model.Node nodeP = nodeStore.getNode(par);
                 parent.appendChild(newNode(doc, nodeP));
             }
         }
@@ -137,13 +139,13 @@ public class FileWriter {
             System.exit(0);
         }
 
-        List<com.android.diego.datanet.Node> nodes = nodeStore.getNodes();
+        List<com.android.diego.datanet.Model.Node> nodes = nodeStore.getNodes();
 
         //Write the CSV file header
         outputStream.println(FILE_HEADER);
 
         //Write a new node object list to the CSV file
-        for (com.android.diego.datanet.Node node : nodes) {
+        for (com.android.diego.datanet.Model.Node node : nodes) {
             //Write if the node is active
             outputStream.print(NODE_ACTIVE);
             outputStream.print(SEMICOLON_DELIMITER);

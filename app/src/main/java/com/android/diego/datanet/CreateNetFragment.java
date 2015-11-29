@@ -2,7 +2,6 @@ package com.android.diego.datanet;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,20 +12,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class NetFragment extends Fragment {
+import com.android.diego.datanet.Model.Net;
+
+public class CreateNetFragment extends Fragment {
 
     private Net mNet;
     private EditText mNetField;
     private Button mNextButton;
     private static final String EXTRA_NET_NAME = "com.android.diego.datanet.net_name";
 
-    public NetFragment() {
+    public CreateNetFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_net, container, false);
+        View view = inflater.inflate(R.layout.fragment_create_net, container, false);
 
         mNet = new Net();
 

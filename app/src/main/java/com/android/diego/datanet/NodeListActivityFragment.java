@@ -9,9 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.diego.datanet.Libraries.DividerItemDecoration;
+import com.android.diego.datanet.Model.*;
 
 import java.util.List;
 import java.util.UUID;

@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.android.diego.datanet.Libraries.MultiSelectionSpinner;
+import com.android.diego.datanet.Model.*;
 
 public class NewNodeActivity extends AppCompatActivity {
 
