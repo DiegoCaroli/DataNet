@@ -1,4 +1,4 @@
-package com.android.diego.datanet;
+package com.android.diego.datanet.Model;
 
 /**
  * Created by Diego on 29/10/2015.

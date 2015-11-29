@@ -1,4 +1,4 @@
-package com.android.diego.datanet;
+package com.android.diego.datanet.Model;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
