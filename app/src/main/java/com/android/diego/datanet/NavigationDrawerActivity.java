@@ -13,7 +13,7 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
     public void init(Bundle savedInstanceState) {
 
         // set the header image
-        //this.setDrawerHeaderImage(R.drawable.mat2);
+        this.setDrawerHeaderImage(R.drawable.header);
 
         // create sections
         this.addSection(newSection("Create", new CreateNetFragment()));

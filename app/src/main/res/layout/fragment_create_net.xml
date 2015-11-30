@@ -16,6 +16,7 @@
             android:text="@string/insert_net"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
             android:padding="24dp"/>
 
         <EditText
@@ -24,6 +25,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/hint_insert_net"
             android:padding="24dp"
+            android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:textColor="@android:color/black"/>
     </LinearLayout>

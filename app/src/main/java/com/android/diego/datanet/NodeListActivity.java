@@ -1,5 +1,6 @@
 package com.android.diego.datanet;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -89,7 +90,8 @@ public class NodeListActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), R.string.file_create, Toast.LENGTH_LONG).show();
 
-                uploadFile(fileCSV);
+                File f = new File(getBaseContext().getFilesDir(), "header.png");
+                uploadFile(f);
 
             } else {
                 Toast.makeText(getApplicationContext(), R.string.net_empty,
@@ -103,6 +105,8 @@ public class NodeListActivity extends AppCompatActivity {
     }
 
     private void uploadFile(File filePath) {
+        final ProgressDialog dialog = ProgressDialog.show(this, "Doing something", "Please wait...");
+
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         try {
@@ -114,6 +118,7 @@ public class NodeListActivity extends AppCompatActivity {
         client.post("http://10.0.2.2:8080/BayesService/upload", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                dialog.dismiss();
                 Toast.makeText(getApplicationContext(), "200",
                         Toast.LENGTH_LONG).show();
             }
