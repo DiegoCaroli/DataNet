@@ -6,11 +6,11 @@
             android:title="@string/menu_cancel_new_node"
             android:orderInCategory="100"
             app:showAsAction="always"
-            android:icon="@drawable/ic_action_cancel"/>
+            android:icon="@drawable/cancel"/>
       <item android:id="@+id/action_done_new_node"
           android:title="@string/menu_done_new_node"
           android:orderInCategory="200"
           app:showAsAction="always"
-          android:icon="@drawable/ic_action_done"/>
+          android:icon="@drawable/done"/>
 
 </menu>
