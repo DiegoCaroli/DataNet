@@ -16,8 +16,8 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
         this.setDrawerHeaderImage(R.drawable.header);
 
         // create sections
-        this.addSection(newSection("Create", new CreateNetFragment()));
-        this.addSection(newSection("Upload", new UploadNetFragment()));
+        this.addSection(newSection("Create", R.drawable.create, new CreateNetFragment()));
+        this.addSection(newSection("Upload", R.drawable.upload, new UploadNetFragment()));
 
         this.disableLearningPattern();
 

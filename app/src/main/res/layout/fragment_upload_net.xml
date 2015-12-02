@@ -11,9 +11,10 @@
         android:layout_gravity="center_horizontal|center_vertical">
 
         <TextView
-            android:text="@string/insert_net"
+            android:text="@string/upload_net"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
             android:padding="24dp"/>
 
         <Spinner
@@ -27,10 +28,10 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/next_insert_net"
+        android:id="@+id/button_create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/next_button"
+        android:text="@string/done_button"
         android:layout_gravity="bottom|center"
         android:drawableRight="@drawable/confirm"
         android:drawablePadding="4dp"

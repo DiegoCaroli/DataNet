@@ -90,9 +90,7 @@ public class NodeListActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), R.string.file_create, Toast.LENGTH_LONG).show();
 
-                File f = new File(getBaseContext().getFilesDir(), "header.png");
-                uploadFile(f);
-
+                uploadFile(fileCSV, fileXML);
             } else {
                 Toast.makeText(getApplicationContext(), R.string.net_empty,
                         Toast.LENGTH_LONG).show();
@@ -104,13 +102,14 @@ public class NodeListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void uploadFile(File filePath) {
-        final ProgressDialog dialog = ProgressDialog.show(this, "Doing something", "Please wait...");
+    private void uploadFile(File fileCSVvPath, File fileXMLPath) {
+        final ProgressDialog dialog = ProgressDialog.show(this, "Uploading file", "Please wait...");
 
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         try {
-            params.put("file", filePath);
+            params.put("filecsv", fileCSVvPath);
+            params.put("filexml", fileXMLPath);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -119,13 +118,14 @@ public class NodeListActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 dialog.dismiss();
-                Toast.makeText(getApplicationContext(), "200",
+                Toast.makeText(getApplicationContext(), R.string.server_ok,
                         Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(getApplicationContext(), "400",
+                dialog.dismiss();
+                Toast.makeText(getApplicationContext(), R.string.server_fail,
                         Toast.LENGTH_LONG).show();
             }
         });
