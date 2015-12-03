@@ -39,7 +39,6 @@ public class NewNodeActivity extends AppCompatActivity {
     private ListView mListView;
     private ArrayAdapter<String> adapter;
 
-    private static final String URL_SERVER = "http://";
     private static final String EXTRA_NET_NAME = "com.android.diego.datanet.net_name";
 
     @Override

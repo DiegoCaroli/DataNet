@@ -35,7 +35,6 @@ public class NodeListActivity extends AppCompatActivity {
     private List<Node> mNodes;
 
     private static final String EXTRA_NET_NAME = "com.android.diego.datanet.net_name";
-    private static final String URL_SERVER = "http://localhost:8080/BayesService/upload/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +90,8 @@ public class NodeListActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.file_create, Toast.LENGTH_LONG).show();
 
                 uploadFile(fileCSV, fileXML);
+
+                createNet(fileNameCSV);
             } else {
                 Toast.makeText(getApplicationContext(), R.string.net_empty,
                         Toast.LENGTH_LONG).show();
@@ -127,6 +128,25 @@ public class NodeListActivity extends AppCompatActivity {
                 dialog.dismiss();
                 Toast.makeText(getApplicationContext(), R.string.server_fail,
                         Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    private void createNet(String fileCsv) {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams param = new RequestParams();
+        param.put("filename", fileCsv);
+
+        client.get("http://10.0.2.2:8080/BayesService/createnet", param, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
             }
         });
 
