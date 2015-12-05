@@ -33,7 +33,6 @@
         android:layout_height="wrap_content"
         android:text="@string/done_button"
         android:layout_gravity="bottom|center"
-        android:drawableRight="@drawable/confirm"
         android:drawablePadding="4dp"
         android:textColor="@android:color/black" />
 
