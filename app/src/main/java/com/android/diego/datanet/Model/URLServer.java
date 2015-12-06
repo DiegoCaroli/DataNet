@@ -10,7 +10,7 @@ public class URLServer {
     private String mURL;
 
     private URLServer(){
-        mURL = "http://localhost:8080/BayesService/upload/";
+        mURL = "http://10.0.2.2:8080/BayesService";
     }
 
     public static URLServer getInstance() {
