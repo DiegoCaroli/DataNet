@@ -96,26 +96,30 @@ public class NodeListActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.net_empty,
                         Toast.LENGTH_LONG).show();
             }
-
-
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-    private void uploadFile(File fileCSVvPath, File fileXMLPath) {
+    @Override
+    public void onBackPressed() {
+    }
+
+    private void uploadFile(File fileCSVPath, File fileXMLPath) {
         final ProgressDialog dialog = ProgressDialog.show(this, "Uploading file", "Please wait...");
 
+        String pathServer = URLServer.getInstance().getURL() + "/upload";
+
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setTimeout(5000);
         RequestParams params = new RequestParams();
         try {
-            params.put("filecsv", fileCSVvPath);
+            params.put("filecsv", fileCSVPath);
             params.put("filexml", fileXMLPath);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        client.post("http://10.0.2.2:8080/BayesService/upload", params, new AsyncHttpResponseHandler() {
+        client.post(pathServer, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 dialog.dismiss();
@@ -133,20 +137,25 @@ public class NodeListActivity extends AppCompatActivity {
 
     }
 
-    private void createNet(String fileCsv) {
+    private void createNet(String nameFileCsv) {
+        String pathServer = URLServer.getInstance().getURL() + "/createnet";
+
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams param = new RequestParams();
-        param.put("filename", fileCsv);
+        param.put("filename", nameFileCsv);
 
-        client.get("http://10.0.2.2:8080/BayesService/createnet", param, new AsyncHttpResponseHandler() {
+        client.setTimeout(5000);
+        client.get(pathServer, param, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
+                Toast.makeText(getApplicationContext(), R.string.server_net,
+                        Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
+                Toast.makeText(getApplicationContext(), R.string.server_fail,
+                        Toast.LENGTH_LONG).show();
             }
         });
 
