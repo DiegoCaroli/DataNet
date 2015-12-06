@@ -11,8 +11,12 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.diego.datanet.Model.URLServer;
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -66,6 +70,7 @@ public class UploadNetFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
+                createNet(String.valueOf(mSpinner.getSelectedItem()));
 
                 Toast.makeText(getActivity(),
                         "Spinner value : " + String.valueOf(mSpinner.getSelectedItem()),
@@ -76,12 +81,13 @@ public class UploadNetFragment extends Fragment {
     }
 
     private void downloadListFile() {
-
         final ProgressDialog dialog = ProgressDialog.show(getActivity(), "Download list file", "Please wait...");
 
-        AsyncHttpClient client = new AsyncHttpClient();
+        String pathServer = URLServer.getInstance().getURL() + "/listfiles";
 
-        client.get("http://10.0.2.2:8080/BayesService/listfile", null, new JsonHttpResponseHandler(){
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setTimeout(5000);
+        client.get(pathServer, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 // If the response is JSONObject instead of expected JSONArray
@@ -96,7 +102,6 @@ public class UploadNetFragment extends Fragment {
 
                         fileNames.add(nameFile);
                     }
-
                 } catch (JSONException e) {
                     dialog.dismiss();
                     e.printStackTrace();
@@ -104,7 +109,6 @@ public class UploadNetFragment extends Fragment {
 
                 dialog.dismiss();
                 addItemsOnSpinner();
-
             }
 
             @Override
@@ -113,6 +117,30 @@ public class UploadNetFragment extends Fragment {
                 dialog.dismiss();
             }
         });
+    }
+
+    private void createNet(String nameFileCsv) {
+        String pathServer = URLServer.getInstance().getURL() + "/createnet";
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams param = new RequestParams();
+        param.put("filename", nameFileCsv);
+
+        client.setTimeout(5000);
+        client.get(pathServer, param, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                Toast.makeText(getActivity(), R.string.server_net,
+                        Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(getActivity(), R.string.server_fail,
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
 }

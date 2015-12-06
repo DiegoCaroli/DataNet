@@ -35,7 +35,7 @@ public class NewNodeActivity extends AppCompatActivity {
     private EditText mNameField;
     private EditText mEditTextInField;
     private ImageButton mButtonAdd;
-    private MultiSelectionSpinner mySpinner;
+    private MultiSelectionSpinner mSpinner;
     private ListView mListView;
     private ArrayAdapter<String> adapter;
 
@@ -120,19 +120,19 @@ public class NewNodeActivity extends AppCompatActivity {
             parentsNode.add(node.getName());
         }
 
-        mySpinner = (MultiSelectionSpinner)findViewById(R.id.spinner);
+        mSpinner = (MultiSelectionSpinner)findViewById(R.id.spinner);
 
         if (parentsNode.isEmpty()) {
-            mySpinner.setEnabled(false);
-            mySpinner.setClickable(false);
+            mSpinner.setEnabled(false);
+            mSpinner.setClickable(false);
         } else {
-            mySpinner.setItems(parentsNode);
+            mSpinner.setItems(parentsNode);
         }
     }
 
     private void setSelectedParents() {
         if (!mNodes.isEmpty()) {
-            List<String> nodeSelected = mySpinner.getSelectedStrings();
+            List<String> nodeSelected = mSpinner.getSelectedStrings();
 
             List<UUID> nodeIDs = new ArrayList<>();
 

@@ -38,5 +38,7 @@
     <string name="upload_net">Select the net you want create:</string>
 
     <string name="server_ok">Upload completed.</string>
-    <string name="server_fail">Check the server. There is some problem with it so it isn\'t possible to complete the upload.</string>
+    <string name="server_fail">Check the server. There are some problem with it.</string>
+
+    <string name="server_net">The net is created successfully.</string>
 </resources>
