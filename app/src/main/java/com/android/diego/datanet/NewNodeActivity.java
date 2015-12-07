@@ -30,7 +30,6 @@ import com.android.diego.datanet.Model.*;
 public class NewNodeActivity extends AppCompatActivity {
 
     private Node mNode;
-    private NodeStore mNodeStore;
     private List<Node> mNodes;
     private EditText mNameField;
     private EditText mEditTextInField;
@@ -48,8 +47,7 @@ public class NewNodeActivity extends AppCompatActivity {
 
         mNode = new Node();
 
-        mNodeStore = NodeStore.get(getBaseContext());
-        mNodes = mNodeStore.getNodes();
+        mNodes = NodeStore.get(getBaseContext()).getNodes();
 
         setNameNode();
         addParentsOnSpinner();
@@ -166,14 +164,6 @@ public class NewNodeActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                removeItemFromList(position);
-            }
-        });
-        */
         mListView.setOnItemLongClickListener(new ListView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -221,7 +211,7 @@ public class NewNodeActivity extends AppCompatActivity {
             tot_conf = mNode.getValues().size() * i;
         } else {
             for (UUID nodeID : mNode.getParents()) {
-                Node node = mNodeStore.getNode(nodeID);
+                Node node = NodeStore.get(getBaseContext()).getNode(nodeID);
                 i *= node.getValues().size();
 
                 tot_conf = mNode.getValues().size() * i;
