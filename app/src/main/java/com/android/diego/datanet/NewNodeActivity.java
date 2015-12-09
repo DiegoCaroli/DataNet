@@ -135,7 +135,7 @@ public class NewNodeActivity extends AppCompatActivity {
             List<UUID> nodeIDs = new ArrayList<>();
 
             for (String nameNode : nodeSelected) {
-                UUID nodeID = mNodeStore.getNodeID(nameNode);
+                UUID nodeID = NodeStore.get(getBaseContext()).getNodeID(nameNode);
 
                 if (nodeID != null) {
                     nodeIDs.add(nodeID);

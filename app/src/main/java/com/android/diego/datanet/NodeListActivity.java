@@ -31,7 +31,6 @@ import cz.msebera.android.httpclient.Header;
 public class NodeListActivity extends AppCompatActivity {
 
     private String mNameNet;
-    private NodeStore mNodeStore;
     private List<Node> mNodes;
 
     private static final String EXTRA_NET_NAME = "com.android.diego.datanet.net_name";
@@ -51,8 +50,7 @@ public class NodeListActivity extends AppCompatActivity {
 
         actionBar.setTitle(mNameNet);
 
-        mNodeStore = NodeStore.get(getBaseContext());
-        mNodes = mNodeStore.getNodes();
+        mNodes = NodeStore.get(getBaseContext()).getNodes();
 
     }
 
@@ -77,7 +75,7 @@ public class NodeListActivity extends AppCompatActivity {
             startActivity(intent);
         } else if (id == R.id.action_done) {
             if (mNodes.size() > 0) {
-                FileWriter fileWriter = new FileWriter(mNodeStore);
+                FileWriter fileWriter = new FileWriter(NodeStore.get(getBaseContext()));
 
                 String fileNameCSV = mNameNet + ".csv";
                 File fileCSV = new File(getBaseContext().getFilesDir(), fileNameCSV);
