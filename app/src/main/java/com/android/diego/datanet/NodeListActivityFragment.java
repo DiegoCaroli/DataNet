@@ -61,7 +61,7 @@ public class NodeListActivityFragment extends Fragment {
     }
 
     private class NodeHolder extends RecyclerView.ViewHolder {
-           // implements View.OnClickListener {
+
 
         private TextView mTitleTextView;
         private TextView mValuesTextView;
@@ -112,6 +112,8 @@ public class NodeListActivityFragment extends Fragment {
                     .show();
         }
         */
+
+
     }
 
     private class NodeAdapter extends RecyclerView.Adapter<NodeHolder> {

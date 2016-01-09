@@ -13,13 +13,7 @@ import android.widget.Toast;
 import com.android.diego.datanet.Model.*;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -85,8 +79,6 @@ public class NodeListActivity extends AppCompatActivity {
                 File fileXML = new File(getBaseContext().getFilesDir(), fileNameXML);
                 fileWriter.writeXmlFile(fileXML);
 
-                Toast.makeText(getApplicationContext(), R.string.file_create, Toast.LENGTH_LONG).show();
-
                 uploadFile(fileCSV, fileXML);
 
                 createNet(fileNameCSV);
@@ -108,7 +100,7 @@ public class NodeListActivity extends AppCompatActivity {
         String pathServer = URLServer.getInstance().getURL() + "/upload";
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.setTimeout(5000);
+        client.setMaxRetriesAndTimeout(3, 1000);
         RequestParams params = new RequestParams();
         try {
             params.put("filecsv", fileCSVPath);
@@ -142,7 +134,7 @@ public class NodeListActivity extends AppCompatActivity {
         RequestParams param = new RequestParams();
         param.put("filename", nameFileCsv);
 
-        client.setTimeout(5000);
+        client.setMaxRetriesAndTimeout(3, 1000);
         client.get(pathServer, param, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

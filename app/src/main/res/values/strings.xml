@@ -24,8 +24,7 @@
     <string name="values_title">Values</string>
     <string name="values_hint">Enter a name for the value.</string>
 
-    <string name="net_empty">The Net is empty, you can\'t write the files.</string>
-    <string name="file_create">The files were created successfully.</string>
+    <string name="net_empty">The Net is empty, you can\'t create it.</string>
 
     <string name="delete_alert">Delete</string>
     <string name="delete_value_message">Do you want delete this value?</string>
