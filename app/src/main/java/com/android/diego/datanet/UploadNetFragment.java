@@ -71,10 +71,6 @@ public class UploadNetFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 createNet(String.valueOf(mSpinner.getSelectedItem()));
-
-                Toast.makeText(getActivity(),
-                        "Spinner value : " + String.valueOf(mSpinner.getSelectedItem()),
-                        Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -86,7 +82,7 @@ public class UploadNetFragment extends Fragment {
         String pathServer = URLServer.getInstance().getURL() + "/listfiles";
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.setTimeout(5000);
+        client.setMaxRetriesAndTimeout(3, 1000);
         client.get(pathServer, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
